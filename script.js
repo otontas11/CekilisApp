@@ -135,31 +135,31 @@ stopButton.addEventListener("click", function () {
   startTimer();
 });
 
-// Allow use of spacebar to start/stop name shuffle
-document.body.onkeyup = function (e) {
-  if (e.keyCode == 32) {
-    if (x % 2 === 0) {
-      startButton.style.display = "none";
-      stopButton.style.display = "block";
-      intervalHandle = setInterval(function () {
-        headerNames.textContent = namesList[i++ % namesList.length];
-      }, 50);
-      if (showTimer === true) {
-        timerWrapper.classList.remove("visible");
-      }
-    } else {
-      startButton.style.display = "block";
-      stopButton.style.display = "none";
-      clearInterval(intervalHandle);
-      timer.innerHTML = time;
-      if (showTimer === true) {
-        timerWrapper.classList.add("visible");
-      }
-      startTimer();
-    }
-    x++;
-  }
-};
+// // Allow use of spacebar to start/stop name shuffle
+// document.body.onkeyup = function (e) {
+//   if (e.keyCode == 32) {
+//     if (x % 2 === 0) {
+//       startButton.style.display = "none";
+//       stopButton.style.display = "block";
+//       intervalHandle = setInterval(function () {
+//         headerNames.textContent = namesList[i++ % namesList.length];
+//       }, 50);
+//       if (showTimer === true) {
+//         timerWrapper.classList.remove("visible");
+//       }
+//     } else {
+//       startButton.style.display = "block";
+//       stopButton.style.display = "none";
+//       clearInterval(intervalHandle);
+//       timer.innerHTML = time;
+//       if (showTimer === true) {
+//         timerWrapper.classList.add("visible");
+//       }
+//       startTimer();
+//     }
+//     x++;
+//   }
+// };
 
 // Blinking warning
 var backgroundInterval = setInterval(function () {
