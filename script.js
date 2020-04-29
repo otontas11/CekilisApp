@@ -19,21 +19,21 @@ class Kisiler {
 class UI {
   kisileriEkle(kisiler) {
     //eklenen kişiler boş elemanları silme
-    var kisilerimBos = kisiler.filter((v) => v != "");
+    var kisilerimBos = kisiler.filter((v) => v.trim() != "");
     console.log("kisilerimBos", kisilerimBos);
 
     //yeni ekleme yapıldığında üsütne ekle ve denetle eğer aynı elema var ise bir tane al sadece
     let names = [...new Set(kisilerimBos)];
-
+    
     for (let kisi of names) {
-      namesList.push(kisi);
+      namesList.push(kisi.trim());
     }
     console.log("guncel", names);
 
     //names set inden farklı değişkenler namesliste gittikten sonra tekrar filtrele
 
     namesList = [...new Set(namesList)];
-
+console.log(namesList,"namelist")
     //names bir taraftan son gelen değişkenleri tutar buyuzden bunu ekrana yazdıralaım
     //eklendikçe göstersin
     kisisListesiEkranaYaz(namesList);
@@ -82,6 +82,10 @@ const timer = document.getElementById("timer");
 //mine
 const addPerson = document.getElementById("addPerson");
 const kisiListesi = document.getElementById("kisiListesi");
+//audi
+var audioElement = document.createElement('audio');
+audioElement.setAttribute('src', 'msc.mp3');
+audioElement.setAttribute('autoplay', 'autoplay');
 
 // Optional countdown timer
 // Add zero in front of numbers < 10
@@ -115,6 +119,14 @@ const startTimer = function () {
 
 // Start or stop the name shuffle on button click
 startButton.addEventListener("click", function () {
+  audioElement.play();
+
+  audioElement.addEventListener("ended", function(){
+  
+    audioElement.play();
+});
+
+
   this.style.display = "none";
   stopButton.style.display = "block";
   intervalHandle = setInterval(function () {
@@ -124,7 +136,9 @@ startButton.addEventListener("click", function () {
     timerWrapper.classList.remove("visible");
   }
 });
+
 stopButton.addEventListener("click", function () {
+  audioElement.pause();
   this.style.display = "none";
   startButton.style.display = "block";
   clearInterval(intervalHandle);
