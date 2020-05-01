@@ -24,7 +24,7 @@ class UI {
 
     //yeni ekleme yapıldığında üsütne ekle ve denetle eğer aynı elema var ise bir tane al sadece
     let names = [...new Set(kisilerimBos)];
-    
+
     for (let kisi of names) {
       namesList.push(kisi.trim());
     }
@@ -33,7 +33,7 @@ class UI {
     //names set inden farklı değişkenler namesliste gittikten sonra tekrar filtrele
 
     namesList = [...new Set(namesList)];
-console.log(namesList,"namelist")
+    console.log(namesList, "namelist");
     //names bir taraftan son gelen değişkenleri tutar buyuzden bunu ekrana yazdıralaım
     //eklendikçe göstersin
     kisisListesiEkranaYaz(namesList);
@@ -83,10 +83,13 @@ const timer = document.getElementById("timer");
 const addPerson = document.getElementById("addPerson");
 const kisiListesi = document.getElementById("kisiListesi");
 //audi
-var audioElement = document.createElement('audio');
-audioElement.setAttribute('src', 'msc.mp3');
-audioElement.setAttribute('autoplay', 'autoplay');
-
+var audioElement = document.createElement("audio");
+audioElement.setAttribute("src", "msc.mp3");
+audioElement.setAttribute("autoplay", "autoplay");
+//winners
+const winners=document.querySelector('.winners')
+let html="";
+let siralamasi=0;
 // Optional countdown timer
 // Add zero in front of numbers < 10
 function checkSecond(sec) {
@@ -121,17 +124,19 @@ const startTimer = function () {
 startButton.addEventListener("click", function () {
   audioElement.play();
 
-  audioElement.addEventListener("ended", function(){
-  
+  audioElement.addEventListener("ended", function () {
     audioElement.play();
-});
-
+  });
 
   this.style.display = "none";
   stopButton.style.display = "block";
   intervalHandle = setInterval(function () {
     headerNames.textContent = namesList[i++ % namesList.length];
+    
   }, 1);
+   
+ showWinners(headerNames.textContent,siralamasi)
+siralamasi++
   if (showTimer === true) {
     timerWrapper.classList.remove("visible");
   }
@@ -191,11 +196,35 @@ function checkempty() {
     }
   });
 }
+function showWinners(wins,no)
+{
+ 
+  const list = document.getElementById("winners");
+  $("tbody tr.wins").empty();
+  var perrow = 1; // 3 cells per row
+   
+    html = "<tr >";
+
+    
+    html += "<td>" +no +". Kazanan : "+ wins + "</td>";
+  
+    var next = i + 1;
+    if (next % perrow == 0 && next != wins.length) {
+      
+      html += "</tr> <tr>";
+       
+    }
+   
+  html += "</tr>";
+ 
+  list.innerHTML += html;
+
+}
 
 document.getElementById("addPerson").addEventListener("click", function () {
   let getList = document.getElementById("kisiListesi").value;
 
-  let newList = getList.split(",");
+  let newList = getList.split('\n');
   console.log("newList--> ", typeof newList, newList);
   const ui = new UI();
   ui.kisileriEkle(newList);

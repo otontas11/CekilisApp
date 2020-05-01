@@ -18,7 +18,15 @@
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
     />
     <style>
- 
+      .table{
+        width: 90%;
+   
+    margin: auto;
+
+      }
+ tbody#winners tr:first-child {
+    display: none;
+}
 		  table {
         border-collapse: collapse;
       }
@@ -38,6 +46,9 @@
         background: #333;
       }
       h1#headerNames {
+        white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
         margin-top: 10%;
         color: #fff;
         font-family: Georgia, serif;
@@ -148,7 +159,7 @@
 				class="form-control"
 				id="kisiListesi"
 				aria-label="With textarea"
-				placeholder="İsimler arasına virgül (,) koyunuz."
+				placeholder="Her Satıra bir isim yazınız"
 			  ></textarea>
 			  <div class="input-group-prepend">
 				<button class="btn btn-success addPerson" id="addPerson">
@@ -161,6 +172,17 @@
 			 
 			  <div class="col-md-12 mt-4">
 				<div class="table-responsive">
+          <table class="table tablec-bordered table-striped">
+            <thead>
+            <tr class="wins">
+              <th style="color: aliceblue;">Kazananlar</th>
+              
+            </tr>
+            </thead>
+            <tbody id="winners"></tbody>
+          </table>
+
+
 				<table class="table tablec-bordered table-striped">
 				  <thead>
 					<tr>
