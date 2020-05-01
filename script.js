@@ -87,9 +87,12 @@ var audioElement = document.createElement("audio");
 audioElement.setAttribute("src", "msc.mp3");
 audioElement.setAttribute("autoplay", "autoplay");
 //winners
-const winners=document.querySelector('.winners')
-let html="";
-let siralamasi=0;
+const winners = document.querySelector(".winners");
+let html = "";
+ 
+
+var winnerList = new Set([]);
+
 // Optional countdown timer
 // Add zero in front of numbers < 10
 function checkSecond(sec) {
@@ -132,11 +135,8 @@ startButton.addEventListener("click", function () {
   stopButton.style.display = "block";
   intervalHandle = setInterval(function () {
     headerNames.textContent = namesList[i++ % namesList.length];
-    
   }, 1);
-   
- showWinners(headerNames.textContent,siralamasi)
-siralamasi++
+
   if (showTimer === true) {
     timerWrapper.classList.remove("visible");
   }
@@ -144,6 +144,12 @@ siralamasi++
 
 stopButton.addEventListener("click", function () {
   audioElement.pause();
+
+  var wins = document.querySelector("#headerNames").innerHTML;
+  showWinners(wins);
+  
+  console.log("wins", wins);
+
   this.style.display = "none";
   startButton.style.display = "block";
   clearInterval(intervalHandle);
@@ -196,35 +202,45 @@ function checkempty() {
     }
   });
 }
-function showWinners(wins,no)
-{
- 
+function showWinners(wins) {
+  let winnerListArray = [...winnerList.add(wins)]; //set i array e çevir
+let colors=["primary","secondary","success","danger","warning","info","active"]
+  console.log("winnerListArray", winnerListArray);
+
   const list = document.getElementById("winners");
-  $("tbody tr.wins").empty();
-  var perrow = 1; // 3 cells per row
-   
-    html = "<tr >";
+  $("#winners tr").empty()
 
-    
-    html += "<td>" +no +". Kazanan : "+ wins + "</td>";
   
-    var next = i + 1;
-    if (next % perrow == 0 && next != wins.length) {
-      
-      html += "</tr> <tr>";
-       
-    }
-   
-  html += "</tr>";
- 
-  list.innerHTML += html;
 
+///////
+ 
+ 
+var perrow = 1, // 3 cells per row
+  html = "<tr class='wins'>";
+ 
+for (var i = 0; i < winnerListArray.length; i++) {
+  html += "<td class='winning table-"+colors[i%6]+" '>" + `${i + 1}. Kazanan : ` + winnerListArray[i] + "</td></tr><tr>";
+
+  // If you need to click on the cell and do something
+  // html += "<td onclick='FUNCTION()'>" + data[i] + "</td>";
+
+  // Break into next row
+  var next = i + 1;
+  if (next % perrow == 0 && next != winnerListArray.length) {
+    html += "</tr><tr>";
+  }
+}
+html += "</tr>";
+
+list.innerHTML += html;
+
+  
 }
 
 document.getElementById("addPerson").addEventListener("click", function () {
   let getList = document.getElementById("kisiListesi").value;
 
-  let newList = getList.split('\n');
+  let newList = getList.split("\n");
   console.log("newList--> ", typeof newList, newList);
   const ui = new UI();
   ui.kisileriEkle(newList);
