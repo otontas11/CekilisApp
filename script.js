@@ -84,7 +84,7 @@ const addPerson = document.getElementById("addPerson");
 const kisiListesi = document.getElementById("kisiListesi");
 //audi
 var audioElement = document.createElement("audio");
-audioElement.setAttribute("src", "msc.mp3");
+audioElement.setAttribute("src", "kahoot.mp3");
 audioElement.setAttribute("autoplay", "autoplay");
 //winners
 const winners = document.querySelector(".winners");
@@ -125,6 +125,8 @@ const startTimer = function () {
 
 // Start or stop the name shuffle on button click
 startButton.addEventListener("click", function () {
+  if(!audioElement) return
+  audioElement.currentTime=0;
   audioElement.play();
 
   audioElement.addEventListener("ended", function () {
