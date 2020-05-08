@@ -1,0 +1,129 @@
+canvas {
+  background: #fafa;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+    .winning{
+     color: black;
+   font-size: large;
+    }
+     .table{
+       width: 90%;
+  
+   margin: auto;
+
+     }
+
+         table {
+       border-collapse: collapse;
+     }
+     table tr td {
+       border: 1px solid #e7f1ea;
+       padding: 10px;
+       color: white;
+     }
+     .fas {
+       cursor: pointer;
+     }
+     div#timerWrapper {
+       display: none;
+       
+     }
+ 
+
+     body {
+       background: #333;
+     }
+     h1#headerNames {
+       white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+       margin-top: 10%;
+       color: #fff;
+       font-family: Georgia, serif;
+       font-size: 100px;
+       text-align: center;
+       cursor: pointer;
+     }
+     .button {
+       width: 150px;
+       margin: auto;
+       padding: 20px;
+       background: #1fa91f;
+       border: 3px solid #fff;
+       border-radius: 10px;
+       color: #fff;
+       font-family: Arial, sans-serif;
+       font-size: 30px;
+       font-weight: bold;
+       text-align: center;
+       text-transform: uppercase;
+       letter-spacing: 2px;
+       display: block;
+       cursor: pointer;
+     }
+     #stopButton {
+       background: #f00;
+       display: none;
+     }
+     #timerWrapper {
+       margin: 50px 0;
+       color: #fff;
+       font-family: Arial, sans-serif;
+       font-size: 50px;
+       text-align: center;
+       opacity: 0;
+       transition: opacity 1s;
+     }
+     #timerWrapper.visible {
+       opacity: 1;
+     }
+     #timesUp {
+       padding-top: 20%;
+       background-color: red;
+       color: #fff;
+       font-family: Arial, sans-serif;
+       font-size: 100px;
+       font-weight: bold;
+       text-transform: uppercase;
+       text-align: center;
+       position: fixed;
+       left: 0;
+       right: 0;
+       top: 0;
+       bottom: 0;
+       display: none;
+     }
+     #timesUp a {
+       margin: 100px auto;
+       font-size: 15px;
+       position: absolute;
+       bottom: 50px;
+       left: 0;
+       right: 0;
+       display: none;
+     }
+     #timesUp.backgroundRed {
+       background-color: #333;
+     }
+     @media only screen and (max-width: 768px) {
+       h1 {
+         font-size: 4rem;
+       }
+       .container{
+           margin-top: 4rem!important;
+       }
+       div#startButton
+       {
+           padding: 5px;
+       }
+       div#stopButton {
+   padding: 5px;
+}
+.iphone{
+  height: 220px;
+}
+     }
+ 

@@ -10,12 +10,13 @@ const time = 0 + ":" + 50000;
 let namesList = [];
 
 checkempty();
-
+ 
 class Kisiler {
   constructor(name) {
     this.name = name;
   }
 }
+ 
 class UI {
   kisileriEkle(kisiler) {
     //eklenen kişiler boş elemanları silme
@@ -37,7 +38,8 @@ class UI {
     //names bir taraftan son gelen değişkenleri tutar buyuzden bunu ekrana yazdıralaım
     //eklendikçe göstersin
     kisisListesiEkranaYaz(namesList);
-
+  
+    
     console.log("guncel namelist", typeof namesList, namesList);
   }
 }
@@ -86,9 +88,10 @@ const kisiListesi = document.getElementById("kisiListesi");
 var audioElement = document.createElement("audio");
 audioElement.setAttribute("src", "kahoot.mp3");
 audioElement.setAttribute("autoplay", "autoplay");
+
+audioElement.pause();
 //winners
 const winners = document.querySelector(".winners");
-let html = "";
  
 
 var winnerList = new Set([]);
@@ -124,14 +127,14 @@ const startTimer = function () {
 };
 
 // Start or stop the name shuffle on button click
-startButton.addEventListener("click", function () {
-  if(!audioElement) return
-  audioElement.currentTime=0;
+startButton.addEventListener("click",function() {
+  if (!audioElement) return;
+  audioElement.currentTime = 0;
   audioElement.play();
-
-  audioElement.addEventListener("ended", function () {
-    audioElement.play();
-  });
+//bittikten sonra tekrar calsın
+  // audioElement.addEventListener("ended", function () {
+  //   audioElement.play();
+  // });
 
   this.style.display = "none";
   stopButton.style.display = "block";
@@ -139,17 +142,40 @@ startButton.addEventListener("click", function () {
     headerNames.textContent = namesList[i++ % namesList.length];
   }, 1);
 
+  console.log("oktay", headerNames.textContent);
+
   if (showTimer === true) {
     timerWrapper.classList.remove("visible");
   }
-});
 
-stopButton.addEventListener("click", function () {
-  audioElement.pause();
+  iphone.style.display = "none";
+  headerOne.style.display="block";
+//geri syımß
+  setTimeout( () => {
+    
+    $(stopButton).trigger('click');
+ 
+    
+  }, 2000);
+      
+    
+   
+});
+ 
+
+ 
+
+
+stopButton.addEventListener("click",function () {
+ var html=""; 
+ 
 
   var wins = document.querySelector("#headerNames").innerHTML;
-  showWinners(wins);
-  
+  setTimeout(function () {
+    console.log("son kazanan", wins);
+    showWinners(wins);
+  }, 3000);
+  //audioElement.pause();  
   console.log("wins", wins);
 
   this.style.display = "none";
@@ -160,34 +186,28 @@ stopButton.addEventListener("click", function () {
     timerWrapper.classList.add("visible");
   }
   startTimer();
+
+  //box işlemleri
+  iphone.style.display = "block";
+  mw.style.visibility = "visible";
+
+  for (i = 0; i < wins.length; i++) {
+    html += `<div class="row rowLetter" style="margin-right:5px;margin-left:5px">
+     
+    <span class="letter">${wins[i]}</span>
+    
+</div>
+
+ `;
+  }  document.getElementById("iconlar").innerHTML = html;
+  console.log("null mı?", html);
+  headerOne.style.display="none"
+ 
+  giftAnimation(wins); 
+ 
 });
 
-// // Allow use of spacebar to start/stop name shuffle
-// document.body.onkeyup = function (e) {
-//   if (e.keyCode == 32) {
-//     if (x % 2 === 0) {
-//       startButton.style.display = "none";
-//       stopButton.style.display = "block";
-//       intervalHandle = setInterval(function () {
-//         headerNames.textContent = namesList[i++ % namesList.length];
-//       }, 50);
-//       if (showTimer === true) {
-//         timerWrapper.classList.remove("visible");
-//       }
-//     } else {
-//       startButton.style.display = "block";
-//       stopButton.style.display = "none";
-//       clearInterval(intervalHandle);
-//       timer.innerHTML = time;
-//       if (showTimer === true) {
-//         timerWrapper.classList.add("visible");
-//       }
-//       startTimer();
-//     }
-//     x++;
-//   }
-// };
-
+ 
 // Blinking warning
 var backgroundInterval = setInterval(function () {
   timesUp.classList.toggle("backgroundRed");
@@ -206,37 +226,46 @@ function checkempty() {
 }
 function showWinners(wins) {
   let winnerListArray = [...winnerList.add(wins)]; //set i array e çevir
-let colors=["primary","secondary","success","danger","warning","info","active"]
+  let colors = [
+    "primary",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "info",
+    "active",
+  ];
   console.log("winnerListArray", winnerListArray);
 
   const list = document.getElementById("winners");
-  $("#winners tr").empty()
+  $("#winners tr").empty();
 
-  
+  ///////
 
-///////
- 
- 
-var perrow = 1, // 3 cells per row
-  html = "<tr class='wins'>";
- 
-for (var i = 0; i < winnerListArray.length; i++) {
-  html += "<td class='winning table-"+colors[i%6]+" '>" + `${i + 1}. Kazanan : ` + winnerListArray[i] + "</td></tr><tr>";
+  var perrow = 1, // 3 cells per row
+    html = "<tr class='wins'>";
 
-  // If you need to click on the cell and do something
-  // html += "<td onclick='FUNCTION()'>" + data[i] + "</td>";
+  for (var i = 0; i < winnerListArray.length; i++) {
+    html +=
+      "<td class='winning table-" +
+      colors[i % 6] +
+      " '>" +
+      `${i + 1}. Kazanan : ` +
+      winnerListArray[i] +
+      "</td></tr><tr>";
 
-  // Break into next row
-  var next = i + 1;
-  if (next % perrow == 0 && next != winnerListArray.length) {
-    html += "</tr><tr>";
+    // If you need to click on the cell and do something
+    // html += "<td onclick='FUNCTION()'>" + data[i] + "</td>";
+
+    // Break into next row
+    var next = i + 1;
+    if (next % perrow == 0 && next != winnerListArray.length) {
+      html += "</tr><tr>";
+    }
   }
-}
-html += "</tr>";
+  html += "</tr>";
 
-list.innerHTML += html;
-
-  
+  list.innerHTML += html;
 }
 
 document.getElementById("addPerson").addEventListener("click", function () {
@@ -249,3 +278,65 @@ document.getElementById("addPerson").addEventListener("click", function () {
   document.getElementById("kisiListesi").value = "";
   $(".addPerson").attr("disabled", true);
 });
+
+// <!-- GIFT BOX SOURCE CODE: https://tympanus.net/codrops/2013/12/24/merry-christmas-with-a-bursting-gift-box/ -->
+
+function giftAnimation(lastwin) {
+  let myarray = [lastwin];
+  console.log("last winner", lastwin);
+  var merrywrap = document.getElementById("merrywrap");
+  var box = merrywrap.getElementsByClassName("giftbox")[0];
+  var step = 1;
+  var stepMinutes = [2000, 2000, 1000, 1000];
+  
+  function init() {
+    
+    openBox();
+  }
+  function stepClass(step) {
+    console.log("stepclass");
+    merrywrap.className = "merrywrap";
+    merrywrap.className = "merrywrap step-" + step;
+    
+  }
+  function openBox() {
+  
+    if (step === 1) {
+      console.log(myarray, "myarray");
+
+      box.removeEventListener("click", openBox, false);
+    }
+    stepClass(step);
+    if (step === 3) {
+      console.log("step 2");
+    }
+    if (step === 4) {
+      console.log("step 4");
+      setTimeout(function () {
+       // audioElement.pause();  
+      }, 2000);
+     
+      return;
+    
+    }
+    setTimeout(openBox, stepMinutes[step - 1]);
+    step++;
+  }
+
+  init();
+}
+
+// =====================
+
+$(document).ready(function () {
+  iphone.style.display = "none";
+  
+
+
+});
+
+var mw = document.getElementById("merrywrap");
+var iphone = document.getElementById("iphone");
+var icons = document.getElementById("#iconlar");
+
+ 
