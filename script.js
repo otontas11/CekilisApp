@@ -75,6 +75,7 @@ function kisisListesiEkranaYaz(data) {
 let i = 0;
 let x = 0;
 let intervalHandle = null;
+ 
 const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
 const headerOne = document.getElementById("headerNames");
@@ -86,7 +87,7 @@ const addPerson = document.getElementById("addPerson");
 const kisiListesi = document.getElementById("kisiListesi");
 //audi
 var audioElement = document.createElement("audio");
-audioElement.setAttribute("src", "kahoot.mp3");
+audioElement.setAttribute("src", "msc.mp3");
 audioElement.setAttribute("autoplay", "autoplay");
 
 audioElement.pause();
@@ -150,19 +151,20 @@ startButton.addEventListener("click",function() {
 
   iphone.style.display = "none";
   headerOne.style.display="block";
-//geri syımß
+//geri 
   setTimeout( () => {
     
     $(stopButton).trigger('click');
  
     
-  }, 2000);
+  }, 16000);
       
-    
+   
    
 });
  
 
+ 
  
 
 
@@ -204,9 +206,12 @@ stopButton.addEventListener("click",function () {
   headerOne.style.display="none"
  
   giftAnimation(wins); 
- 
+  //animasyonu baslat
+   
 });
 
+
+ 
  
 // Blinking warning
 var backgroundInterval = setInterval(function () {
@@ -338,5 +343,9 @@ $(document).ready(function () {
 var mw = document.getElementById("merrywrap");
 var iphone = document.getElementById("iphone");
 var icons = document.getElementById("#iconlar");
+
+ 
+
+
 
  
