@@ -76,7 +76,7 @@ let i = 0;
 let x = 0;
 let intervalHandle = null;
  
-
+const confetti=document.getElementById("confetti");
 const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
 const headerOne = document.getElementById("headerNames");
@@ -159,21 +159,21 @@ startButton.addEventListener("click",function() {
  
     
   }, 16000);
-      
+  confetti.style.display = "none";
    
    ///animasyon başlat
- animeCon();
+   
 });
  
 
- 
+
  
 
 
 stopButton.addEventListener("click",function () {
  var html=""; 
+ confetti.style.display = "block";
  
-
   var wins = document.querySelector("#headerNames").innerHTML;
   setTimeout(function () {
     console.log("son kazanan", wins);
@@ -210,7 +210,10 @@ stopButton.addEventListener("click",function () {
   giftAnimation(wins); 
   //animasyonu baslat
    
-}); 
+});
+
+
+ 
  
 // Blinking warning
 var backgroundInterval = setInterval(function () {
@@ -286,6 +289,8 @@ document.getElementById("addPerson").addEventListener("click", function () {
 // <!-- GIFT BOX SOURCE CODE: https://tympanus.net/codrops/2013/12/24/merry-christmas-with-a-bursting-gift-box/ -->
 
 function giftAnimation(lastwin) {
+
+  animeCon();
   let myarray = [lastwin];
   console.log("last winner", lastwin);
   var merrywrap = document.getElementById("merrywrap");

@@ -43,7 +43,7 @@ var retina = window.devicePixelRatio,
   };
 }(window));
 
- function animeCon()
+ const animeCon=()=>
  {
 
  
@@ -395,3 +395,5 @@ var retina = window.devicePixelRatio,
     confetti.resize();
   });
  }
+
+ 
