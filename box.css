@@ -269,7 +269,8 @@
 	 background: rgba(0, 0, 0, 0.2);
 }
  .icons {
- 
+ position: relative;
+ z-index: 1;
 	 top: 5%;
 	 display: flex;
 	 width: 100%;
@@ -301,7 +302,7 @@
 	 opacity: 0;
 }
  .step-3 .giftbox, .step-4 .giftbox {
-	 opacity: 0;
+	 opacity: .50;
 	 z-index: 1;
 }
  .step-3 .giftbox:after, .step-4 .giftbox:after {

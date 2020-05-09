@@ -76,6 +76,7 @@ let i = 0;
 let x = 0;
 let intervalHandle = null;
  
+
 const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
 const headerOne = document.getElementById("headerNames");
@@ -160,7 +161,8 @@ startButton.addEventListener("click",function() {
   }, 16000);
       
    
-   
+   ///animasyon başlat
+ animeCon();
 });
  
 
@@ -208,10 +210,7 @@ stopButton.addEventListener("click",function () {
   giftAnimation(wins); 
   //animasyonu baslat
    
-});
-
-
- 
+}); 
  
 // Blinking warning
 var backgroundInterval = setInterval(function () {
